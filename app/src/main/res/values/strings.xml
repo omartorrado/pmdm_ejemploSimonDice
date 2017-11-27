@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PMDMEjemploJuego</string>
+    <string name="jugar">Jugar</string>
+    <string name="nueva">Nueva</string>
+    <string name="puntos">PUNTOS</string>
+    <string name="record">RECORD</string>
+</resources>
