@@ -1,5 +1,7 @@
 package org.danielcastelao.otorradomiguez.pmdmejemplojuego;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,13 +22,21 @@ public class MainActivity extends AppCompatActivity {
     int[] colores=new int[50];
     boolean esCorrecto=false;
 
+    int puntuacion=0;
+    int record=0;
+
     Button botonVerde;
     Button botonAmarillo;
     Button botonAzul;
     Button botonRojo;
+    Button botonCentral;
+
+    TextView puntos_valor;
+    TextView record_valor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -34,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
         botonAmarillo=(Button)findViewById(R.id.boton_amarillo);
         botonAzul=(Button)findViewById(R.id.boton_azul);
         botonRojo=(Button)findViewById(R.id.boton_rojo);
+        botonCentral=(Button)findViewById(R.id.color_center);
+
+        puntos_valor= (TextView)findViewById(R.id.puntos_valor);
+        record_valor= (TextView)findViewById(R.id.record_valor);
+
+        puntos_valor.setText(""+puntuacion);
 
         botonVerde.setBackgroundColor(Color.GREEN);
         botonVerde.setAlpha(0.5f);
@@ -85,10 +101,17 @@ public class MainActivity extends AppCompatActivity {
                 iluminarBoton(botonAmarillo);
             }
         });
-
-
+        botonCentral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                generarSecuencia();
+            }
+        });
 
     }
+
+
+
 
     public void nuevaPartida(){
         findViewById(R.id.color_center).setBackgroundColor(Color.GRAY);
@@ -183,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button botonStart=(Button)findViewById(R.id.boton_empezar);
         botonStart.setEnabled(false);
-
+        botonCentral.setEnabled(false);
     }
 
     public void comprobarColor(int color){
@@ -191,12 +214,18 @@ public class MainActivity extends AppCompatActivity {
         final Button loseMessage=(Button)findViewById(R.id.color_center);
         if(color==colores[posicionCheck]){
             posicionCheck++;
+            puntuacion+=5;
+            puntos_valor.setText(""+puntuacion);
         }else{
             esCorrecto=false;
         }
 
         if(posicionCheck==turnosTotales && esCorrecto){
+            //Bonus por racha
+            puntuacion+=turnosTotales*2;
+            puntos_valor.setText(""+puntuacion);
             botonStart.setEnabled(true);
+            botonCentral.setEnabled(true);
             botonAmarillo.setEnabled(false);
             botonAzul.setEnabled(false);
             botonRojo.setEnabled(false);
@@ -239,9 +268,15 @@ public class MainActivity extends AppCompatActivity {
                     loseMessage.setBackgroundColor(Color.GRAY);
                     TextView t= (TextView) findViewById(R.id.turno);
                     t.setText("Turno: 0");
+
                 }
             },1000);
-
+            if(record<puntuacion){
+                record=puntuacion;
+                record_valor.setText(""+record);
+            }
+            puntuacion=0;
+            puntos_valor.setText(""+puntuacion);
             nuevaPartida();
             botonStart.setEnabled(true);
         }

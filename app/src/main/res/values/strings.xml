@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">PMDMEjemploJuego</string>
+    <string name="app_name">Omar says</string>
     <string name="jugar">Jugar</string>
     <string name="nueva">Nueva</string>
     <string name="puntos">PUNTOS</string>
     <string name="record">RECORD</string>
+    <string name="record_valor">2</string>
 </resources>
