@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -121,9 +120,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void nuevaPartida(){
+        if(record<puntuacion){
+            record=puntuacion;
+            record_valor.setText(""+record);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt(getString(R.string.saved_high_score), record);
+            editor.commit();
+        }
         findViewById(R.id.color_center).setBackgroundColor(Color.GRAY);
         turnosTotales=0;
         puntuacion=0;
+        puntos_valor.setText(""+puntuacion);
+        Button botonStart=(Button)findViewById(R.id.boton_empezar);
+        botonStart.setEnabled(true);
+        botonCentral.setEnabled(true);
+        TextView t= (TextView) findViewById(R.id.turno);
+        t.setText("Turno: "+turnosTotales);
     }
 
     public void updateBackground(int color){
@@ -263,6 +275,12 @@ public class MainActivity extends AppCompatActivity {
             loseMessage.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    botonAzul.setVisibility(View.INVISIBLE);
+                    botonRojo.setVisibility(View.INVISIBLE);
+                    botonAmarillo.setVisibility(View.INVISIBLE);
+                    botonVerde.setVisibility(View.INVISIBLE);
+                    TextView t= (TextView) findViewById(R.id.turno);
+                    t.setVisibility(View.INVISIBLE);
                     loseMessage.setBackgroundColor(Color.WHITE);
                     loseMessage.setText("HAS PERDIDO");
                     loseMessage.setScaleX(3f);
@@ -278,7 +296,11 @@ public class MainActivity extends AppCompatActivity {
                     loseMessage.setBackgroundColor(Color.GRAY);
                     TextView t= (TextView) findViewById(R.id.turno);
                     t.setText("Turno: 0");
-
+                    botonAzul.setVisibility(View.VISIBLE);
+                    botonRojo.setVisibility(View.VISIBLE);
+                    botonAmarillo.setVisibility(View.VISIBLE);
+                    botonVerde.setVisibility(View.VISIBLE);
+                    t.setVisibility(View.VISIBLE);
                 }
             },1500);
             if(record<puntuacion){

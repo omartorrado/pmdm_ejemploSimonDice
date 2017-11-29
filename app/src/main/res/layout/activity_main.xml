@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="org.danielcastelao.otorradomiguez.pmdmejemplojuego.MainActivity">
-
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
         <GridLayout
             android:layout_width="match_parent"
@@ -26,6 +16,24 @@
             android:padding="10dp"
             android:rowCount="4">
 
+            <Button
+                android:id="@+id/color_center"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_vertical|fill_horizontal"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:background="@android:color/darker_gray"
+                android:elevation="0dp"
+                android:padding="5dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
             <TextView
                 android:id="@+id/turno"
                 android:layout_width="0dp"
@@ -38,7 +46,7 @@
                 android:layout_rowWeight="1"
                 android:gravity="center_vertical"
                 android:padding="5dp"
-                android:text="Turno: "
+                android:text="Turno: 0"
                 android:textAlignment="center"
                 android:visibility="visible" />
 
@@ -96,23 +104,6 @@
                 android:layout_rowWeight="1"
                 android:background="@android:color/holo_green_light"
                 android:padding="5dp"
-                android:visibility="visible" />
-
-            <Button
-                android:id="@+id/color_center"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_column="1"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_vertical|fill_horizontal"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:background="@android:color/darker_gray"
-                android:padding="5dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="14sp"
-                android:textStyle="bold"
                 android:visibility="visible" />
 
             <Button
@@ -206,4 +197,4 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+
