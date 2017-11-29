@@ -4,5 +4,6 @@
     <string name="nueva">Nueva</string>
     <string name="puntos">PUNTOS</string>
     <string name="record">RECORD</string>
-    <string name="record_valor">2</string>
+    <string name="saved_high_score" />
+
 </resources>

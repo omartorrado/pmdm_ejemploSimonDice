@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     TextView puntos_valor;
     TextView record_valor;
 
+    SharedPreferences sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         record_valor= (TextView)findViewById(R.id.record_valor);
 
         puntos_valor.setText(""+puntuacion);
+
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+        record=sharedPref.getInt(getString(R.string.saved_high_score), 0);
+        record_valor.setText(""+record);
 
         botonVerde.setBackgroundColor(Color.GREEN);
         botonVerde.setAlpha(0.5f);
@@ -116,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
     public void nuevaPartida(){
         findViewById(R.id.color_center).setBackgroundColor(Color.GRAY);
         turnosTotales=0;
+        puntuacion=0;
     }
 
     public void updateBackground(int color){
@@ -230,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
             botonAzul.setEnabled(false);
             botonRojo.setEnabled(false);
             botonVerde.setEnabled(false);
+            /*
             loseMessage.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -248,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                     loseMessage.setText("");
                                     }
             },1000);
+            */
         }
         if(!esCorrecto && turnosTotales>0){
             loseMessage.postDelayed(new Runnable() {
@@ -270,10 +280,14 @@ public class MainActivity extends AppCompatActivity {
                     t.setText("Turno: 0");
 
                 }
-            },1000);
+            },1500);
             if(record<puntuacion){
                 record=puntuacion;
                 record_valor.setText(""+record);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt(getString(R.string.saved_high_score), record);
+                editor.commit();
+
             }
             puntuacion=0;
             puntos_valor.setText(""+puntuacion);
